@@ -1,0 +1,17 @@
+model_id,input_cost_per_1m,output_cost_per_1m,currency,effective_date,source_url
+gpt-4o,10.00,30.00,USD,2024-05-13,https://openai.com/api/pricing/
+gpt-4o,5.00,15.00,USD,2024-11-01,https://openai.com/api/pricing/
+gpt-4o,2.50,10.00,USD,2025-01-15,https://openai.com/api/pricing/
+claude-3-5-sonnet,3.00,15.00,USD,2024-06-20,https://www.anthropic.com/pricing
+claude-3-5-sonnet,3.00,15.00,USD,2024-10-22,https://www.anthropic.com/pricing
+claude-3-5-sonnet,3.00,15.00,USD,2024-12-01,https://www.anthropic.com/pricing
+gemini-1-5-pro,7.00,21.00,USD,2024-02-15,https://ai.google.dev/pricing
+gemini-1-5-pro,3.50,10.50,USD,2024-05-01,https://ai.google.dev/pricing
+gemini-1-5-pro,1.25,5.00,USD,2024-06-01,https://ai.google.dev/pricing
+llama-3-70b,0.90,0.90,USD,2024-04-18,https://artificialanalysis.ai
+llama-3-70b,0.59,0.79,USD,2024-08-01,https://artificialanalysis.ai
+mistral-large,8.00,24.00,USD,2024-02-01,https://mistral.ai/pricing
+mistral-large,4.00,12.00,USD,2024-07-24,https://mistral.ai/pricing
+command-r-plus,3.00,15.00,USD,2024-03-01,https://cohere.com/pricing
+command-r-plus,3.00,15.00,USD,2024-06-01,https://cohere.com/pricing
+command-r-plus,3.00,15.00,USD,2024-09-01,https://cohere.com/pricing

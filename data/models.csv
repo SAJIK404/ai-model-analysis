@@ -1,0 +1,7 @@
+model_id,provider,model_name,version,release_date,context_window_tokens,tokens_per_second
+gpt-4o,OpenAI,GPT-4o,gpt-4o-2024-05-13,2024-05-13,128000,110
+claude-3-5-sonnet,Anthropic,Claude,claude-3-5-sonnet-20241022,2024-10-22,200000,85
+gemini-1-5-pro,Google,Gemini,gemini-1.5-pro,2024-02-15,1000000,95
+llama-3-70b,Meta,Llama,llama-3-70b-instruct,2024-04-18,8192,75
+mistral-large,Mistral,Mistral,mistral-large-2407,2024-07-24,128000,90
+command-r-plus,Cohere,Command R+,command-r-plus-08-2024,2024-08-01,128000,70
