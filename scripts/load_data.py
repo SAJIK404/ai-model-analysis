@@ -10,8 +10,12 @@ from pathlib import Path
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+from ai_config import load_config
+
+cfg = load_config()
 DATA_DIR = PROJECT_ROOT / "data"
-DB_PATH = DATA_DIR / "ai_models.db"
+DB_PATH = Path(cfg.get("db_path", str(DATA_DIR / "ai_models.db")))
 
 logging.basicConfig(
     level=logging.INFO,

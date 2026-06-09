@@ -1,0 +1,14 @@
+# Project configuration (overrides defaults in ai_config.py)
+# db_path: data/ai_models.db
+# output_dir: output
+# chart_ids: ["01", "02", "03", "04", "05"]
+
+# Example: change price aggregation method (not yet used by code).
+# price_aggregation: average
+
+benchmark_categories:
+  coding: HumanEval
+  reasoning:
+    - MMLU
+    - GPQA
+  math: MATH

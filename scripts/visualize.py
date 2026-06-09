@@ -9,6 +9,10 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+from ai_config import load_config
+
+cfg = load_config()
+DB_PATH = Path(cfg.get("db_path", str(PROJECT_ROOT / "data" / "ai_models.db")))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -18,6 +22,15 @@ import pandas as pd
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from db.ctes import LATEST_PRICING_CTE
+from src.processing import (
+    fetch_model_summary,
+    fetch_benchmark_matrix,
+    fetch_price_evolution,
+    fetch_category_top3,
+    compute_value_score_from_dfs,
+    cap_at_percentile,
+    normalize_column,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / "data" / "ai_models.db"
@@ -79,128 +92,10 @@ def provider_legend_handles(providers: list[str] | None = None) -> list[Patch]:
     ]
 
 
-def fetch_model_summary(conn: sqlite3.Connection) -> pd.DataFrame:
-    """Load model metrics joined with latest pricing and avg benchmark scores."""
-    sql = f"""
-    WITH
-    {LATEST_PRICING_CTE},
-    avg_benchmarks AS (
-        SELECT model_id, AVG(score) AS avg_benchmark_score
-        FROM benchmarks
-        GROUP BY model_id
-    ),
-    current_pricing AS (
-        SELECT model_id, avg_cost_per_1m
-        FROM latest_pricing
-        WHERE rn = 1
-    )
-    SELECT
-        m.model_id,
-        m.provider,
-        m.model_name,
-        m.tokens_per_second,
-        cp.avg_cost_per_1m,
-        ab.avg_benchmark_score,
-        ab.avg_benchmark_score / NULLIF(cp.avg_cost_per_1m, 0) AS value_score
-    FROM models m
-    JOIN current_pricing cp ON m.model_id = cp.model_id
-    JOIN avg_benchmarks ab ON m.model_id = ab.model_id
-    ORDER BY m.model_id;
-    """
-    return pd.read_sql_query(sql, conn)
 
 
-def fetch_benchmark_matrix(conn: sqlite3.Connection) -> pd.DataFrame:
-    """Load benchmark scores as a models × benchmarks matrix."""
-    sql = """
-    SELECT
-        m.model_id,
-        m.provider,
-        b.benchmark_name,
-        b.score
-    FROM benchmarks b
-    JOIN models m ON b.model_id = m.model_id;
-    """
-    raw = pd.read_sql_query(sql, conn)
-    matrix = raw.pivot(index="model_id", columns="benchmark_name", values="score")
-    matrix = matrix.reindex(columns=BENCHMARK_ORDER)
-    providers = raw.drop_duplicates("model_id").set_index("model_id")["provider"]
-    matrix["provider"] = providers
-    return matrix
 
 
-def fetch_price_evolution(conn: sqlite3.Connection) -> pd.DataFrame:
-    """Load pricing history grouped by provider."""
-    sql = """
-    SELECT
-        m.provider,
-        p.model_id,
-        p.effective_date,
-        (p.input_cost_per_1m + p.output_cost_per_1m) / 2.0 AS avg_cost_per_1m
-    FROM pricing p
-    JOIN models m ON p.model_id = m.model_id
-    ORDER BY p.effective_date;
-    """
-    return pd.read_sql_query(sql, conn)
-
-
-def fetch_category_top3(conn: sqlite3.Connection) -> pd.DataFrame:
-    """Load the top 3 models per benchmark category for grouped bar chart."""
-    sql = """
-    WITH category_scores AS (
-        SELECT
-            b.model_id,
-            m.provider,
-            CASE b.benchmark_name
-                WHEN 'HumanEval' THEN 'coding'
-                WHEN 'MMLU' THEN 'reasoning'
-                WHEN 'GPQA' THEN 'reasoning'
-                WHEN 'MATH' THEN 'math'
-                ELSE 'other'
-            END AS category,
-            b.score
-        FROM benchmarks b
-        JOIN models m ON b.model_id = m.model_id
-    ),
-    category_avg AS (
-        SELECT model_id, provider, category, AVG(score) AS score
-        FROM category_scores
-        WHERE category <> 'other'
-        GROUP BY model_id, provider, category
-    ),
-    ranked AS (
-        SELECT
-            category,
-            model_id,
-            provider,
-            score,
-            RANK() OVER (
-                PARTITION BY category
-                ORDER BY score DESC
-            ) AS category_rank
-        FROM category_avg
-    )
-    SELECT category, model_id, provider, score, category_rank
-    FROM ranked
-    WHERE category_rank <= 3
-    ORDER BY category, category_rank;
-    """
-    return pd.read_sql_query(sql, conn)
-
-
-def cap_at_percentile(series: pd.Series, percentile: float = 90) -> pd.Series:
-    """Cap values at the given percentile to reduce outlier distortion."""
-    cap = np.percentile(series, percentile)
-    return series.clip(upper=cap)
-
-
-def normalize_column(series: pd.Series) -> pd.Series:
-    """Min-max normalize a series to 0–1; constant columns map to 0.5."""
-    col_min = series.min()
-    col_max = series.max()
-    if col_max == col_min:
-        return pd.Series(0.5, index=series.index)
-    return (series - col_min) / (col_max - col_min)
 
 
 def save_figure(fig: plt.Figure, filename: str) -> Path:
@@ -211,6 +106,55 @@ def save_figure(fig: plt.Figure, filename: str) -> Path:
     plt.close(fig)
     logger.info("Saved chart: %s", path)
     return path
+
+
+def save_manifest(paths: list[Path]) -> Path:
+    """Write a manifest.json to the output directory listing generated files and metadata."""
+    import json
+    import subprocess
+    from datetime import datetime
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    manifest_path = OUTPUT_DIR / "manifest.json"
+    commit = None
+    try:
+        commit = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=PROJECT_ROOT).decode().strip()
+    except Exception:
+        commit = None
+
+    entries = []
+    for p in paths:
+        entries.append({
+            "file": p.name,
+            "path": str(p),
+            "generated_at": datetime.utcnow().isoformat() + "Z",
+        })
+
+    manifest = {"commit": commit, "files": entries}
+    with manifest_path.open("w", encoding="utf8") as f:
+        json.dump(manifest, f, indent=2)
+    logger.info("Wrote manifest: %s", manifest_path)
+    # Also append a run entry to runs.json for lightweight experiment tracking
+    runs_path = OUTPUT_DIR / "runs.json"
+    run_entry = {
+        "commit": commit,
+        "files": [p.name for p in paths],
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+    }
+    try:
+        if runs_path.exists():
+            with runs_path.open("r", encoding="utf8") as f:
+                runs = json.load(f)
+        else:
+            runs = []
+        runs.append(run_entry)
+        with runs_path.open("w", encoding="utf8") as f:
+            json.dump(runs, f, indent=2)
+        logger.info("Appended run entry to: %s", runs_path)
+    except Exception:
+        logger.exception("Failed to update runs.json")
+
+    return manifest_path
 
 
 
@@ -429,15 +373,19 @@ def generate_all_charts(conn: sqlite3.Connection) -> list[Path]:
     matrix = fetch_benchmark_matrix(conn)
     pricing = fetch_price_evolution(conn)
     top3 = fetch_category_top3(conn)
+    paths = []
+    paths.append(plot_provider_summary(summary))
+    paths.append(plot_speed_vs_cost_scatter(summary))
+    paths.append(plot_value_score_bar(summary))
+    paths.append(plot_benchmark_heatmap(matrix))
+    paths.append(plot_best_per_category(top3))
 
-    paths = [
-        plot_provider_summary(summary),
-        plot_speed_vs_cost_scatter(summary),
-        plot_value_score_bar(summary),
-        # visualization 04 removed by request — provider-level cost distribution is not generated here
-        plot_benchmark_heatmap(matrix),
-        plot_best_per_category(top3),
-    ]
+    # write manifest
+    try:
+        save_manifest(paths)
+    except Exception:
+        logger.exception("Failed to write manifest")
+
     return paths
 
 

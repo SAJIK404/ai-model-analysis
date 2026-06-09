@@ -198,3 +198,15 @@ Data is manually curated for portfolio purposes and may not reflect real-time pr
 ## Author
 
 Portfolio project — Financial & Technical Data Analysis with Python and SQL
+
+## Design Decisions
+
+- **Value score**: defined as average benchmark score ÷ average token cost (avg of input/output costs). We use the latest effective pricing record per model and NULLIF to avoid division-by-zero.
+- **Benchmark grouping**: `HumanEval` → `coding`; `MMLU` + `GPQA` → `reasoning`; `MATH` → `math`. Models with no matching category are excluded from category aggregates.
+- **Bootstrap stability**: a simple bootstrap resampling of benchmark records estimates the stability of value_score rankings; reported in `output/evaluation_bootstrap_report.csv`.
+- **Reproducibility**: `scripts/visualize.py` writes `output/manifest.json` and appends run metadata to `output/runs.json`.
+
+## Additional scripts
+
+- `scripts/evaluate.py`: Run a simple bootstrap evaluation and produce `output/evaluation_bootstrap_report.csv`.
+- CI: a GitHub Actions workflow is included at `.github/workflows/ci.yml` to run tests on push/pull requests.
