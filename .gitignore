@@ -16,3 +16,4 @@ __pycache__/
 # Sistema
 .DS_Store
 *.log
+.venv_test/
