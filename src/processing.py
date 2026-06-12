@@ -5,6 +5,19 @@ from db.ctes import LATEST_PRICING_CTE
 
 
 def fetch_model_summary(conn: sqlite3.Connection) -> pd.DataFrame:
+    """Fetch model summary including value_score from the database.
+
+    Value score formula: avg_benchmark_score / avg_cost_per_1m
+    - avg_benchmark_score: mean of all benchmark scores for the model
+    - avg_cost_per_1m: (input_cost_per_1m + output_cost_per_1m) / 2 from the
+      most recent pricing record (latest effective_date)
+    - Zero cost produces NULL (via NULLIF) rather than a division error
+
+    SYNC NOTE: This is the SQL implementation of the value score calculation.
+    The pandas equivalent is compute_value_score_from_dfs(), used by the
+    bootstrap evaluator in src/evaluation.py. If the formula changes here,
+    update that function too — and vice versa.
+    """
     sql = f"""
     WITH
     {LATEST_PRICING_CTE},
@@ -121,6 +134,23 @@ def fetch_category_top3(conn: sqlite3.Connection) -> pd.DataFrame:
 
 
 def compute_value_score_from_dfs(models: pd.DataFrame, benchmarks: pd.DataFrame, pricing: pd.DataFrame) -> pd.DataFrame:
+    """Compute value_score from raw DataFrames (pandas implementation).
+
+    Value score formula: avg_benchmark_score / avg_cost_per_1m
+    - avg_benchmark_score: mean of all benchmark scores for the model
+    - avg_cost_per_1m: (input_cost_per_1m + output_cost_per_1m) / 2 from the
+      most recent pricing record (latest effective_date)
+    - Zero cost produces pd.NA rather than a division error
+
+    This function exists as a pandas alternative to the SQL implementation in
+    fetch_model_summary() because the bootstrap evaluator in src/evaluation.py
+    needs to resample benchmark DataFrames in memory — something that cannot
+    be done efficiently via SQL.
+
+    SYNC NOTE: This is the pandas implementation of the value score calculation.
+    The SQL equivalent is fetch_model_summary(). If the formula changes here,
+    update that function too — and vice versa.
+    """
     # avg benchmark per model
     ab = benchmarks.groupby('model_id', as_index=False)['score'].mean().rename(columns={'score':'avg_benchmark_score'})
     # latest pricing per model by effective_date
