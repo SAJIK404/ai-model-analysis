@@ -2,8 +2,8 @@
   "project": {
     "name": "AI Model Benchmark Portfolio",
     "description": "An interactive technical portfolio for AI model value, pricing, and benchmark analysis.",
-    "last_run": "2026-06-27T20:11:52.428256Z",
-    "commit": "e9751d7"
+    "last_run": "2026-06-27T20:16:39.764227Z",
+    "commit": "86d4884"
   },
   "charts": [
     {
@@ -47,7 +47,7 @@
         "model_id": "gemini-1-5-pro",
         "provider": "Google",
         "model_name": "Gemini",
-        "avg_benchmark_score": 70.98,
+        "avg_benchmark_score": 70.97,
         "avg_cost_per_1m": 3.125,
         "value_score": 22.712,
         "value_rank": 2
@@ -104,7 +104,7 @@
         "model_id": "gemini-1-5-pro",
         "provider": "Google",
         "model_name": "Gemini",
-        "avg_benchmark_score": 70.98,
+        "avg_benchmark_score": 70.97,
         "avg_cost_per_1m": 3.125,
         "value_score": 22.712
       },
@@ -411,7 +411,7 @@
         "model_name": "Gemini",
         "tokens_per_second": 95.0,
         "avg_cost_per_1m": 3.125,
-        "avg_benchmark_score": 70.98,
+        "avg_benchmark_score": 70.97,
         "speed_per_dollar": 30.4,
         "efficiency_rank": 2
       },
@@ -493,38 +493,38 @@
   },
   "metadata": {
     "manifest": {
-      "commit": "e9751d7",
+      "commit": "86d4884",
       "files": [
         {
           "file": "01_provider_summary.png",
-          "path": "/home/sajik/Documents/ai-model-analysis/output/01_provider_summary.png",
-          "generated_at": "2026-06-27T20:11:52.427742Z"
+          "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/01_provider_summary.png",
+          "generated_at": "2026-06-27T20:16:39.763903Z"
         },
         {
           "file": "02_speed_vs_cost_scatter.png",
-          "path": "/home/sajik/Documents/ai-model-analysis/output/02_speed_vs_cost_scatter.png",
-          "generated_at": "2026-06-27T20:11:52.427762Z"
+          "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/02_speed_vs_cost_scatter.png",
+          "generated_at": "2026-06-27T20:16:39.763915Z"
         },
         {
           "file": "03_value_score_ranking.png",
-          "path": "/home/sajik/Documents/ai-model-analysis/output/03_value_score_ranking.png",
-          "generated_at": "2026-06-27T20:11:52.427768Z"
+          "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/03_value_score_ranking.png",
+          "generated_at": "2026-06-27T20:16:39.763918Z"
         },
         {
           "file": "04_benchmark_heatmap.png",
-          "path": "/home/sajik/Documents/ai-model-analysis/output/04_benchmark_heatmap.png",
-          "generated_at": "2026-06-27T20:11:52.427773Z"
+          "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/04_benchmark_heatmap.png",
+          "generated_at": "2026-06-27T20:16:39.763921Z"
         },
         {
           "file": "05_best_per_category.png",
-          "path": "/home/sajik/Documents/ai-model-analysis/output/05_best_per_category.png",
-          "generated_at": "2026-06-27T20:11:52.427778Z"
+          "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/05_best_per_category.png",
+          "generated_at": "2026-06-27T20:16:39.763923Z"
         }
       ]
     },
     "runs": [
       {
-        "commit": "e9751d7",
+        "commit": "86d4884",
         "files": [
           "01_provider_summary.png",
           "02_speed_vs_cost_scatter.png",
@@ -532,7 +532,7 @@
           "04_benchmark_heatmap.png",
           "05_best_per_category.png"
         ],
-        "generated_at": "2026-06-27T20:11:52.428256Z"
+        "generated_at": "2026-06-27T20:16:39.764227Z"
       }
     ]
   }
