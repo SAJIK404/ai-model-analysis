@@ -1,0 +1,53 @@
+name: GitHub Pages Site
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # every Monday at 06:00 UTC
+  push:
+    branches:
+      - main
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run data pipeline
+        run: |
+          python scripts/load_data.py
+          python scripts/visualize.py
+          python scripts/evaluate.py
+
+      - name: Export site data
+        run: |
+          python scripts/export_site_data.py
+
+      - name: Commit generated site content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json docs/images/*.png
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update GitHub Pages site data"
+            git push origin HEAD:main
+          else
+            echo "No changes to commit"
+          fi

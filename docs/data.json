@@ -1,0 +1,539 @@
+{
+  "project": {
+    "name": "AI Model Benchmark Portfolio",
+    "description": "An interactive technical portfolio for AI model value, pricing, and benchmark analysis.",
+    "last_run": "2026-06-27T20:11:52.428256Z",
+    "commit": "e9751d7"
+  },
+  "charts": [
+    {
+      "id": "01",
+      "title": "Provider Value Summary",
+      "file": "images/01_provider_summary.png"
+    },
+    {
+      "id": "02",
+      "title": "Speed vs Cost",
+      "file": "images/02_speed_vs_cost_scatter.png"
+    },
+    {
+      "id": "03",
+      "title": "Value Score Ranking",
+      "file": "images/03_value_score_ranking.png"
+    },
+    {
+      "id": "04",
+      "title": "Benchmark Heatmap",
+      "file": "images/04_benchmark_heatmap.png"
+    },
+    {
+      "id": "05",
+      "title": "Best per Category",
+      "file": "images/05_best_per_category.png"
+    }
+  ],
+  "metrics": {
+    "value_score_ranking": [
+      {
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "avg_benchmark_score": 62.1,
+        "avg_cost_per_1m": 0.69,
+        "value_score": 90.0,
+        "value_rank": 1
+      },
+      {
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "avg_benchmark_score": 70.98,
+        "avg_cost_per_1m": 3.125,
+        "value_score": 22.712,
+        "value_rank": 2
+      },
+      {
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "avg_benchmark_score": 77.28,
+        "avg_cost_per_1m": 6.25,
+        "value_score": 12.364,
+        "value_rank": 3
+      },
+      {
+        "model_id": "mistral-large",
+        "provider": "Mistral",
+        "model_name": "Mistral",
+        "avg_benchmark_score": 72.5,
+        "avg_cost_per_1m": 8.0,
+        "value_score": 9.0625,
+        "value_rank": 4
+      },
+      {
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "avg_benchmark_score": 79.5,
+        "avg_cost_per_1m": 9.0,
+        "value_score": 8.8333,
+        "value_rank": 5
+      },
+      {
+        "model_id": "command-r-plus",
+        "provider": "Cohere",
+        "model_name": "Command R+",
+        "avg_benchmark_score": 60.0,
+        "avg_cost_per_1m": 9.0,
+        "value_score": 6.6667,
+        "value_rank": 6
+      }
+    ],
+    "best_per_tier": [
+      {
+        "price_tier": "budget",
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "avg_benchmark_score": 62.1,
+        "avg_cost_per_1m": 0.69,
+        "value_score": 90.0
+      },
+      {
+        "price_tier": "mid",
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "avg_benchmark_score": 70.98,
+        "avg_cost_per_1m": 3.125,
+        "value_score": 22.712
+      },
+      {
+        "price_tier": "premium",
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "avg_benchmark_score": 77.28,
+        "avg_cost_per_1m": 6.25,
+        "value_score": 12.364
+      }
+    ],
+    "category_rankings": [
+      {
+        "category": "coding",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "category_score": 92.0,
+        "category_rank": 1
+      },
+      {
+        "category": "coding",
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "category_score": 90.2,
+        "category_rank": 2
+      },
+      {
+        "category": "coding",
+        "model_id": "mistral-large",
+        "provider": "Mistral",
+        "model_name": "Mistral",
+        "category_score": 89.0,
+        "category_rank": 3
+      },
+      {
+        "category": "coding",
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "category_score": 84.1,
+        "category_rank": 4
+      },
+      {
+        "category": "coding",
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "category_score": 81.7,
+        "category_rank": 5
+      },
+      {
+        "category": "coding",
+        "model_id": "command-r-plus",
+        "provider": "Cohere",
+        "model_name": "Command R+",
+        "category_score": 72.0,
+        "category_rank": 6
+      },
+      {
+        "category": "reasoning",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "category_score": 73.85,
+        "category_rank": 1
+      },
+      {
+        "category": "reasoning",
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "category_score": 71.15,
+        "category_rank": 2
+      },
+      {
+        "category": "reasoning",
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "category_score": 66.05,
+        "category_rank": 3
+      },
+      {
+        "category": "reasoning",
+        "model_id": "mistral-large",
+        "provider": "Mistral",
+        "model_name": "Mistral",
+        "category_score": 66.0,
+        "category_rank": 4
+      },
+      {
+        "category": "reasoning",
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "category_score": 58.15,
+        "category_rank": 5
+      },
+      {
+        "category": "reasoning",
+        "model_id": "command-r-plus",
+        "provider": "Cohere",
+        "model_name": "Command R+",
+        "category_score": 56.5,
+        "category_rank": 6
+      },
+      {
+        "category": "math",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "category_score": 78.3,
+        "category_rank": 1
+      },
+      {
+        "category": "math",
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "category_score": 76.6,
+        "category_rank": 2
+      },
+      {
+        "category": "math",
+        "model_id": "mistral-large",
+        "provider": "Mistral",
+        "model_name": "Mistral",
+        "category_score": 69.0,
+        "category_rank": 3
+      },
+      {
+        "category": "math",
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "category_score": 67.7,
+        "category_rank": 4
+      },
+      {
+        "category": "math",
+        "model_id": "command-r-plus",
+        "provider": "Cohere",
+        "model_name": "Command R+",
+        "category_score": 55.0,
+        "category_rank": 5
+      },
+      {
+        "category": "math",
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "category_score": 50.4,
+        "category_rank": 6
+      }
+    ],
+    "price_evolution": [
+      {
+        "provider": "Anthropic",
+        "model_id": "claude-3-5-sonnet",
+        "effective_date": "2024-06-20",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "Anthropic",
+        "model_id": "claude-3-5-sonnet",
+        "effective_date": "2024-10-22",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": 0.0,
+        "price_version": 2
+      },
+      {
+        "provider": "Anthropic",
+        "model_id": "claude-3-5-sonnet",
+        "effective_date": "2024-12-01",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": 0.0,
+        "price_version": 3
+      },
+      {
+        "provider": "Cohere",
+        "model_id": "command-r-plus",
+        "effective_date": "2024-03-01",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "Cohere",
+        "model_id": "command-r-plus",
+        "effective_date": "2024-06-01",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": 0.0,
+        "price_version": 2
+      },
+      {
+        "provider": "Cohere",
+        "model_id": "command-r-plus",
+        "effective_date": "2024-09-01",
+        "avg_cost_per_1m": 9.0,
+        "pct_change_from_prev": 0.0,
+        "price_version": 3
+      },
+      {
+        "provider": "Google",
+        "model_id": "gemini-1-5-pro",
+        "effective_date": "2024-02-15",
+        "avg_cost_per_1m": 14.0,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "Google",
+        "model_id": "gemini-1-5-pro",
+        "effective_date": "2024-05-01",
+        "avg_cost_per_1m": 7.0,
+        "pct_change_from_prev": -50.0,
+        "price_version": 2
+      },
+      {
+        "provider": "Google",
+        "model_id": "gemini-1-5-pro",
+        "effective_date": "2024-06-01",
+        "avg_cost_per_1m": 3.125,
+        "pct_change_from_prev": -55.36,
+        "price_version": 3
+      },
+      {
+        "provider": "Meta",
+        "model_id": "llama-3-70b",
+        "effective_date": "2024-04-18",
+        "avg_cost_per_1m": 0.9,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "Meta",
+        "model_id": "llama-3-70b",
+        "effective_date": "2024-08-01",
+        "avg_cost_per_1m": 0.69,
+        "pct_change_from_prev": -23.33,
+        "price_version": 2
+      },
+      {
+        "provider": "Mistral",
+        "model_id": "mistral-large",
+        "effective_date": "2024-02-01",
+        "avg_cost_per_1m": 16.0,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "Mistral",
+        "model_id": "mistral-large",
+        "effective_date": "2024-07-24",
+        "avg_cost_per_1m": 8.0,
+        "pct_change_from_prev": -50.0,
+        "price_version": 2
+      },
+      {
+        "provider": "OpenAI",
+        "model_id": "gpt-4o",
+        "effective_date": "2024-05-13",
+        "avg_cost_per_1m": 20.0,
+        "pct_change_from_prev": null,
+        "price_version": 1
+      },
+      {
+        "provider": "OpenAI",
+        "model_id": "gpt-4o",
+        "effective_date": "2024-11-01",
+        "avg_cost_per_1m": 10.0,
+        "pct_change_from_prev": -50.0,
+        "price_version": 2
+      },
+      {
+        "provider": "OpenAI",
+        "model_id": "gpt-4o",
+        "effective_date": "2025-01-15",
+        "avg_cost_per_1m": 6.25,
+        "pct_change_from_prev": -37.5,
+        "price_version": 3
+      }
+    ],
+    "speed_vs_cost": [
+      {
+        "model_id": "llama-3-70b",
+        "provider": "Meta",
+        "model_name": "Llama",
+        "tokens_per_second": 75.0,
+        "avg_cost_per_1m": 0.69,
+        "avg_benchmark_score": 62.1,
+        "speed_per_dollar": 108.6957,
+        "efficiency_rank": 1
+      },
+      {
+        "model_id": "gemini-1-5-pro",
+        "provider": "Google",
+        "model_name": "Gemini",
+        "tokens_per_second": 95.0,
+        "avg_cost_per_1m": 3.125,
+        "avg_benchmark_score": 70.98,
+        "speed_per_dollar": 30.4,
+        "efficiency_rank": 2
+      },
+      {
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "tokens_per_second": 110.0,
+        "avg_cost_per_1m": 6.25,
+        "avg_benchmark_score": 77.28,
+        "speed_per_dollar": 17.6,
+        "efficiency_rank": 3
+      },
+      {
+        "model_id": "mistral-large",
+        "provider": "Mistral",
+        "model_name": "Mistral",
+        "tokens_per_second": 90.0,
+        "avg_cost_per_1m": 8.0,
+        "avg_benchmark_score": 72.5,
+        "speed_per_dollar": 11.25,
+        "efficiency_rank": 4
+      },
+      {
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "tokens_per_second": 85.0,
+        "avg_cost_per_1m": 9.0,
+        "avg_benchmark_score": 79.5,
+        "speed_per_dollar": 9.4444,
+        "efficiency_rank": 5
+      },
+      {
+        "model_id": "command-r-plus",
+        "provider": "Cohere",
+        "model_name": "Command R+",
+        "tokens_per_second": 70.0,
+        "avg_cost_per_1m": 9.0,
+        "avg_benchmark_score": 60.0,
+        "speed_per_dollar": 7.7778,
+        "efficiency_rank": 6
+      }
+    ],
+    "top_model_per_benchmark": [
+      {
+        "benchmark_name": "GPQA",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "score": 59.4,
+        "benchmark_rank": 1
+      },
+      {
+        "benchmark_name": "HumanEval",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "score": 92.0,
+        "benchmark_rank": 1
+      },
+      {
+        "benchmark_name": "MATH",
+        "model_id": "claude-3-5-sonnet",
+        "provider": "Anthropic",
+        "model_name": "Claude",
+        "score": 78.3,
+        "benchmark_rank": 1
+      },
+      {
+        "benchmark_name": "MMLU",
+        "model_id": "gpt-4o",
+        "provider": "OpenAI",
+        "model_name": "GPT-4o",
+        "score": 88.7,
+        "benchmark_rank": 1
+      }
+    ]
+  },
+  "metadata": {
+    "manifest": {
+      "commit": "e9751d7",
+      "files": [
+        {
+          "file": "01_provider_summary.png",
+          "path": "/home/sajik/Documents/ai-model-analysis/output/01_provider_summary.png",
+          "generated_at": "2026-06-27T20:11:52.427742Z"
+        },
+        {
+          "file": "02_speed_vs_cost_scatter.png",
+          "path": "/home/sajik/Documents/ai-model-analysis/output/02_speed_vs_cost_scatter.png",
+          "generated_at": "2026-06-27T20:11:52.427762Z"
+        },
+        {
+          "file": "03_value_score_ranking.png",
+          "path": "/home/sajik/Documents/ai-model-analysis/output/03_value_score_ranking.png",
+          "generated_at": "2026-06-27T20:11:52.427768Z"
+        },
+        {
+          "file": "04_benchmark_heatmap.png",
+          "path": "/home/sajik/Documents/ai-model-analysis/output/04_benchmark_heatmap.png",
+          "generated_at": "2026-06-27T20:11:52.427773Z"
+        },
+        {
+          "file": "05_best_per_category.png",
+          "path": "/home/sajik/Documents/ai-model-analysis/output/05_best_per_category.png",
+          "generated_at": "2026-06-27T20:11:52.427778Z"
+        }
+      ]
+    },
+    "runs": [
+      {
+        "commit": "e9751d7",
+        "files": [
+          "01_provider_summary.png",
+          "02_speed_vs_cost_scatter.png",
+          "03_value_score_ranking.png",
+          "04_benchmark_heatmap.png",
+          "05_best_per_category.png"
+        ],
+        "generated_at": "2026-06-27T20:11:52.428256Z"
+      }
+    ]
+  }
+}

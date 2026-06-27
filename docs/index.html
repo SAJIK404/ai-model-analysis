@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Model Benchmark Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>AI Model Benchmark Portfolio</h1>
+      <p>Un sitio técnico que presenta métricas de valor, precio y rendimiento para modelos de IA contemporáneos.</p>
+      <p class="subtitle">Los resultados se actualizan semanalmente desde GitHub Actions y se consumen desde un JSON estático.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section" id="about">
+      <h2>Visión general del proyecto</h2>
+      <p>Este análisis combina benchmarks de MMLU, HumanEval, MATH y GPQA con pricing histórico para generar un ranking de <strong>valor por dólar</strong>. La evaluación usa una métrica compuesta de <em>score promedio / costo promedio por 1M tokens</em>.</p>
+      <dl class="metadata-list">
+        <div>
+          <dt>Última actualización</dt>
+          <dd id="last-run">Cargando...</dd>
+        </div>
+        <div>
+          <dt>Commit</dt>
+          <dd id="commit-hash">Cargando...</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section" id="charts">
+      <h2>Visualizaciones</h2>
+      <div id="chart-grid" class="chart-grid"></div>
+    </section>
+
+    <section class="section" id="ranking">
+      <h2>Ranking de valor por modelo</h2>
+      <p>Los modelos se ordenan según el score compuesto de benchmark colombiano sobre costo.</p>
+      <div class="table-container" id="value-score-table"></div>
+    </section>
+
+    <section class="section" id="tier-best">
+      <h2>Mejor modelo por categoría de precio</h2>
+      <div class="table-container" id="best-tier-table"></div>
+    </section>
+
+    <section class="section" id="category-rankings">
+      <h2>Top en categorías de benchmark</h2>
+      <div class="table-container" id="category-table"></div>
+    </section>
+
+    <section class="section" id="benchmarks">
+      <h2>Modelos top por benchmark</h2>
+      <div class="table-container" id="benchmark-table"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Generado con Python, SQLite, pandas y GitHub Actions. Repositorio original en GitHub.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

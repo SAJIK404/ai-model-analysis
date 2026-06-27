@@ -75,6 +75,12 @@ ai-model-analysis/
 │   └── test_processing.py   # Unit tests for value score computation and edge cases
 ├── ai_config.py             # Configuration loader (reads conf/config.yaml, applies defaults)
 ├── requirements.txt         # Python dependencies
+├── docs/                    # Static GitHub Pages site content
+│   ├── index.html
+│   ├── styles.css
+│   ├── main.js
+│   ├── data.json
+│   └── images/              # Generated chart assets for the site
 └── README.md
 ```
 
@@ -93,9 +99,10 @@ pip install -r requirements.txt
 python scripts/load_data.py      # 1. Load CSVs → SQLite
 python scripts/query_data.py     # 2. Run analytical queries
 python scripts/visualize.py      # 3. Generate charts → output/
+python scripts/export_site_data.py  # 4. Export static JSON and chart assets to docs/
 ```
 
-Each script runs independently from the project root. `query_data.py` and `visualize.py` require `data/ai_models.db` to exist (created by `load_data.py`).
+Each script runs independently from the project root. `query_data.py` and `visualize.py` require `data/ai_models.db` to exist (created by `load_data.py`). The static site is published from `docs/` and consumes `docs/data.json` with generated metrics and chart images.
 
 ---
 
