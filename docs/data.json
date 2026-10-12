@@ -2,8 +2,8 @@
   "project": {
     "name": "AI Model Benchmark Portfolio",
     "description": "An interactive technical portfolio for AI model value, pricing, and benchmark analysis.",
-    "last_run": "2026-10-05T14:17:06.498720Z",
-    "commit": "7a9157f"
+    "last_run": "2026-10-12T15:05:29.916138Z",
+    "commit": "d54108e"
   },
   "charts": [
     {
@@ -493,38 +493,38 @@
   },
   "metadata": {
     "manifest": {
-      "commit": "7a9157f",
+      "commit": "d54108e",
       "files": [
         {
           "file": "01_provider_summary.png",
           "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/01_provider_summary.png",
-          "generated_at": "2026-10-05T14:17:06.498443Z"
+          "generated_at": "2026-10-12T15:05:29.915874Z"
         },
         {
           "file": "02_speed_vs_cost_scatter.png",
           "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/02_speed_vs_cost_scatter.png",
-          "generated_at": "2026-10-05T14:17:06.498456Z"
+          "generated_at": "2026-10-12T15:05:29.915886Z"
         },
         {
           "file": "03_value_score_ranking.png",
           "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/03_value_score_ranking.png",
-          "generated_at": "2026-10-05T14:17:06.498460Z"
+          "generated_at": "2026-10-12T15:05:29.915889Z"
         },
         {
           "file": "04_benchmark_heatmap.png",
           "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/04_benchmark_heatmap.png",
-          "generated_at": "2026-10-05T14:17:06.498464Z"
+          "generated_at": "2026-10-12T15:05:29.915891Z"
         },
         {
           "file": "05_best_per_category.png",
           "path": "/home/runner/work/ai-model-analysis/ai-model-analysis/output/05_best_per_category.png",
-          "generated_at": "2026-10-05T14:17:06.498467Z"
+          "generated_at": "2026-10-12T15:05:29.915893Z"
         }
       ]
     },
     "runs": [
       {
-        "commit": "7a9157f",
+        "commit": "d54108e",
         "files": [
           "01_provider_summary.png",
           "02_speed_vs_cost_scatter.png",
@@ -532,7 +532,7 @@
           "04_benchmark_heatmap.png",
           "05_best_per_category.png"
         ],
-        "generated_at": "2026-10-05T14:17:06.498720Z"
+        "generated_at": "2026-10-12T15:05:29.916138Z"
       }
     ]
   }
